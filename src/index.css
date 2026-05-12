@@ -1,0 +1,531 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+/* ═══════════════ DESIGN TOKENS ═══════════════ */
+@theme {
+  --color-brand: #1a3a32;
+  --color-brand-light: #3e9d7e;
+  --color-brand-dark: #0f2620;
+  --color-accent: #c9a84c;
+  --color-gold: #b8973f;
+  --color-danger: #c0392b;
+  --color-success: #27ae60;
+  --color-info: #2980b9;
+  --color-dcwr: #6a0080;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Header button utility */
+.btn-header {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-header:hover { background: rgba(255,255,255,0.2); }
+
+/* ═══════════════ ROOT THEME VARS (Modern Dark / FitAgent Style) ═══════════════ */
+:root {
+  --ink: #f0f0f0;
+  --teal: #161616;         /* Sidebar / Header BG */
+  --teal2: #242424;        /* Borders / Hover states */
+  --teal3: #ff6b4a;        /* Primary Coral/Orange Accent */
+  --accent: #ff6b4a;       /* Accents */
+  --gold: #ffa07a;
+  --cream: #0d0d0d;        /* Main App Background (#111-ish) */
+  --paper: #161616;        /* Card Background */
+  --line: #262626;         /* Subtle borders */
+  --soft: #1e1e1e;         /* Inputs / Secondary BG */
+  --muted: #808080;        /* Secondary Text */
+  --danger: #ff4d4f;
+  --success: #27c26c;
+  --info: #3598db;
+  --dcwr: #a26bfa;
+  --radius: 14px;          /* Softer, more modern rounded corners */
+  --shadow: 0 8px 30px rgba(0,0,0,0.5);
+  
+  /* Status/Table Backgrounds (very subtle in dark mode) */
+  --open-bg: #241c1a;
+  --pur-bg: #1c1a24;
+  --sale-bg: #24201a;
+  --final-bg: #1a241e;
+  --phys-bg: #1a2024;
+  --crm-bg: #1a2422;
+  --diff-bg: #241a1a;
+  
+  /* Added font size var from 26.04 base */
+  --table-font-size: 11px;
+}
+
+/* ═══════════════ BOX SIZING ═══════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ═══════════════ BASE ═══════════════ */
+html {
+  overflow-x: hidden;
+}
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ═══════════════ TABLE SCALING (From 26.04) ═══════════════ */
+table { font-size: var(--table-font-size) !important; }
+table th, table td { font-size: inherit; }
+
+/* ═══════════════ DARK THEME ═══════════════ */
+[data-theme="dark"] {
+  --ink: #e0e0e0; --teal: #1a2e28; --teal2: #1e3a32; --teal3: #3e9d7e;
+  --accent: #c9a84c; --gold: #b8973f; --cream: #111; --paper: #1a1a1a;
+  --line: #333; --soft: #222; --muted: #888; --danger: #e74c3c;
+  --success: #2ecc71; --info: #3498db; --dcwr: #bb86fc;
+  --open-bg: #1a2e28; --pur-bg: #1e1a2e; --sale-bg: #2e2a1a;
+  --final-bg: #1a2e1e; --phys-bg: #1a1e2e; --crm-bg: #1a2e2a; --diff-bg: #2e1a1a;
+  --shadow: 0 2px 12px rgba(0,0,0,.5);
+}
+
+/* ═══════════════ MIDNIGHT ═══════════════ */
+[data-theme="midnight"] {
+  --ink: #e0e0f0; --teal: #10102e; --teal2: #1a1a50; --teal3: #5c6bc0;
+  --accent: #ffab40; --gold: #ff9800; --cream: #0a0a18; --paper: #12122a;
+  --line: #2a2a50; --soft: #1a1a38; --muted: #8888b0; --danger: #ef5350;
+  --success: #66bb6a; --info: #42a5f5; --dcwr: #ce93d8;
+  --open-bg: #1a1e2e; --pur-bg: #1a1a38; --sale-bg: #2a2410;
+  --final-bg: #1a2e22; --phys-bg: #1a1a3a; --crm-bg: #1a2038; --diff-bg: #2e1a1e;
+  --shadow: 0 2px 12px rgba(0,0,30,.6);
+}
+
+/* ═══════════════ AMBER ═══════════════ */
+[data-theme="amber"] {
+  --ink: #f0e8d8; --teal: #3a2800; --teal2: #5c4000; --teal3: #f59e0b;
+  --accent: #fbbf24; --gold: #f59e0b; --cream: #181208; --paper: #201a0e;
+  --line: #3a3018; --soft: #2a2210; --muted: #a09070; --danger: #ef5350;
+  --success: #4caf50; --info: #42a5f5; --dcwr: #ba68c8;
+  --open-bg: #2a2418; --pur-bg: #1a1a2e; --sale-bg: #2e2810;
+  --final-bg: #1e2e18; --phys-bg: #1e1e30; --crm-bg: #1a2828; --diff-bg: #2e1a14;
+  --shadow: 0 2px 12px rgba(40,20,0,.5);
+}
+
+/* ═══════════════ LAVENDER ═══════════════ */
+[data-theme="lavender"] {
+  --ink: #e8e0f0; --teal: #1e1030; --teal2: #2e1850; --teal3: #9c27b0;
+  --accent: #ce93d8; --gold: #e040fb; --cream: #140e1a; --paper: #1a1222;
+  --line: #30204a; --soft: #241838; --muted: #9080a8; --danger: #ef5350;
+  --success: #66bb6a; --info: #42a5f5; --dcwr: #e040fb;
+  --open-bg: #1e1a28; --pur-bg: #1a1a30; --sale-bg: #2a2018;
+  --final-bg: #1a2e20; --phys-bg: #1e1830; --crm-bg: #1a2030; --diff-bg: #2e1a1e;
+  --shadow: 0 2px 12px rgba(20,0,40,.5);
+}
+
+/* ═══════════════ SLATE ═══════════════ */
+[data-theme="slate"] {
+  --ink: #e0e4e8; --teal: #1e2630; --teal2: #2e3a48; --teal3: #607d8b;
+  --accent: #90a4ae; --gold: #b0bec5; --cream: #101418; --paper: #161c22;
+  --line: #2e3840; --soft: #1e2830; --muted: #8090a0; --danger: #ef5350;
+  --success: #66bb6a; --info: #42a5f5; --dcwr: #ba68c8;
+  --open-bg: #1a2228; --pur-bg: #181e28; --sale-bg: #222018;
+  --final-bg: #1a2820; --phys-bg: #1a1e28; --crm-bg: #182428; --diff-bg: #281a18;
+  --shadow: 0 2px 12px rgba(0,10,20,.5);
+}
+
+/* ═══════════════ JET BLACK ═══════════════ */
+[data-theme="jetblack"] {
+  --ink: #e8e8e8; --teal: #000000; --teal2: #111; --teal3: #888;
+  --accent: #e0e0e0; --gold: #bbb; --cream: #000; --paper: #0a0a0a;
+  --line: #222; --soft: #141414; --muted: #777; --danger: #ff4444;
+  --success: #44cc44; --info: #4488ff; --dcwr: #aa66dd;
+  --open-bg: #0a0a0a; --pur-bg: #080810; --sale-bg: #100e08;
+  --final-bg: #0a100a; --phys-bg: #0a0a10; --crm-bg: #081010; --diff-bg: #100808;
+  --shadow: 0 2px 12px rgba(0,0,0,.8);
+}
+
+/* ═══════════════ VIBRANT THEME ═══════════════ */
+[data-theme="beige"] {
+  --ink: #1f083d;
+  --teal: #2e1065;
+  --teal2: #e2e8f0;
+  --teal3: #fc6042;
+  --accent: #fc6042;
+  --gold: #fc6042;
+  --cream: #ffffff;
+  --paper: #ffffff;
+  --line: #e2e8f0;
+  --soft: #f8fafc;
+  --muted: #6b7280;
+  --danger: #ef4444;
+  --success: #fc6042;
+  --info: #3b82f6;
+  --dcwr: #2e1065;
+  --open-bg: #ffffff;
+  --pur-bg: #f8fafc;
+  --sale-bg: #ffffff;
+  --final-bg: #f8fafc;
+  --phys-bg: #ffffff;
+  --crm-bg: #f8fafc;
+  --diff-bg: #fff1f2;
+  --shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+/* ═══════════════ NEON MATRIX (n8n Inspired) ═══════════════ */
+[data-theme="neon"] {
+  --ink: #ffffff;
+  --teal: rgba(10, 5, 15, 0.85);
+  --teal2: #381238;
+  --teal3: #ff4766;
+  --accent: #f02d4f;
+  --gold: #ff6e40;
+  --cream: radial-gradient(circle at 50% 110%, #76143c 0%, #300c25 40%, #0d040f 85%) fixed;
+  --paper: rgba(15, 6, 20, 0.4);
+  --line: rgba(255, 255, 255, 0.1);
+  --soft: rgba(255, 255, 255, 0.05);
+  --muted: #b59cb8;
+  --danger: #ff3366;
+  --success: #00e5ff;
+  --info: #bd00ff;
+  --dcwr: #ff00c8;
+  --open-bg: rgba(255, 255, 255, 0.03);
+  --pur-bg: rgba(255, 255, 255, 0.03);
+  --sale-bg: rgba(255, 255, 255, 0.03);
+  --final-bg: rgba(255, 255, 255, 0.03);
+  --phys-bg: rgba(255, 255, 255, 0.03);
+  --crm-bg: rgba(255, 255, 255, 0.03);
+  --diff-bg: rgba(255, 0, 50, 0.05);
+  --shadow: 0 8px 32px rgba(255, 40, 100, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ═══════════════ CINESWIPE THEME ═══════════════ */
+[data-theme="cineswipe"] {
+  --ink: #e2e2e2;            /* text-on-surface */
+  --teal: #1f1f1f;           /* surface-container */
+  --teal2: #353535;          /* surface-container-highest */
+  --teal3: #ffb1c3;          /* primary */
+  --accent: #00dbe9;         /* tertiary */
+  --gold: #ff4b89;           /* primary-container */
+  --cream: #0e0e0e;          /* surface-container-lowest */
+  --paper: #1b1b1b;          /* surface-container-low */
+  --line: #5c3f45;           /* outline-variant */
+  --soft: #2a2a2a;           /* surface-container-high */
+  --muted: #e5bcc4;          /* on-surface-variant */
+  --danger: #ffb4ab;         /* error */
+  --success: #00dbe9;        /* tertiary */
+  --info: #7df4ff;           /* tertiary-fixed */
+  --dcwr: #ff4b89;           /* primary-container */
+  
+  --open-bg: #1a1a1a;
+  --pur-bg: #1f1f1f;
+  --sale-bg: #161616;
+  --final-bg: #181818;
+  --phys-bg: #1a1a1a;
+  --crm-bg: #1c1c1c;
+  --diff-bg: #2a1b1b;
+  --shadow: 0 8px 32px rgba(255, 177, 195, 0.1);
+  
+  /* Overriding fonts for this theme */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ═══════════════ ANIMATIONS ═══════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+/* ═══════════════ SCROLLBAR ═══════════════ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--soft); }
+::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--teal3); }
+
+/* ═══════════════ MOBILE SIDEBAR OVERLAY ═══════════════ */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 90;
+  animation: fadeInBackdrop 0.2s ease;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.sidebar-drawer {
+  animation: slideInLeft 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ═══════════════ MOBILE RESPONSIVE ═══════════════ */
+@media (max-width: 767px) {
+  /* Reduce main content padding on mobile */
+  .mobile-main-padding {
+    padding: 12px !important;
+  }
+
+  /* Smooth horizontal scroll for tables */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    max-width: 100%;
+  }
+
+  /* Better tap targets */
+  button, select, input, a {
+    min-height: 36px;
+  }
+
+  /* Hide scrollbar on mobile for cleaner look but keep scrollable */
+  .overflow-x-auto::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  /* Prevent fixed-width inputs from overflowing */
+  input[type="date"], input[type="text"], input[type="number"], select {
+    max-width: 100%;
+  }
+
+  /* Header range slider shrink on mobile */
+  .header-range-slider {
+    width: 60px;
+  }
+
+  /* Tables: ensure they scroll inside their container */
+  table {
+    min-width: max-content;
+  }
+}
+
+/* Hamburger button */
+.hamburger-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hamburger-btn:hover {
+  background: var(--line);
+}
+
+@media (max-width: 767px) {
+  .hamburger-btn { display: flex; }
+}
+
+/* ═══════════════ CATEGORY ACCORDION ═══════════════ */
+.cat-accordion {
+  margin-top: 4px;
+}
+
+.cat-pill-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 2px 10px 2px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.cat-pill-bar::-webkit-scrollbar { display: none; }
+
+.cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--line);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+.cat-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.cat-pill-active {
+  box-shadow: 0 2px 12px rgba(232, 89, 60, 0.3);
+}
+.cat-pill-toggle {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.cat-pill-count {
+  opacity: 0.7;
+  font-weight: 600;
+  font-size: 10px;
+}
+.cat-pill-chevron {
+  font-size: 10px;
+  transition: transform 0.25s ease;
+  opacity: 0.6;
+}
+.cat-pill-chevron-open {
+  transform: rotate(180deg);
+}
+
+.cat-panel {
+  will-change: max-height, opacity;
+}
+.cat-panel-inner {
+  padding: 10px 0 6px 0;
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+  margin-bottom: 8px;
+}
+.cat-panel-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+@media (max-width: 767px) {
+  .cat-pill-bar {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    padding-bottom: 8px;
+  }
+  .cat-pill {
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+  .cat-panel-inner {
+    padding-left: 8px;
+  }
+}
+
+/* ═══════════════ RESPONSIVE TABLE CONTAINER ═══════════════ */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ═══════════════ HEADER RESPONSIVENESS ═══════════════ */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+/* On small screens, hide the font-size slider */
+@media (max-width: 640px) {
+  .header-font-sizer {
+    display: none !important;
+  }
+  .header-actions {
+    gap: 4px;
+  }
+  .header-godown-select {
+    display: none !important;
+  }
+}
+
+/* Clamp main content so it never bleeds past viewport */
+.main-content-wrapper {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* ═══════════════ FILTER BAR RESPONSIVENESS ═══════════════ */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.filter-bar input,
+.filter-bar select {
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+@media (max-width: 767px) {
+  .filter-bar input[type="date"] {
+    width: 130px;
+    max-width: 100%;
+  }
+  .filter-bar .w-40 {
+    width: auto;
+    flex: 1 1 100px;
+  }
+}
+
+/* ═══════════════ TABLET BREAKPOINTS ═══════════════ */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mobile-main-padding {
+    padding: 16px !important;
+  }
+}
+
+/* ═══════════════ ANIMATIONS ═══════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}

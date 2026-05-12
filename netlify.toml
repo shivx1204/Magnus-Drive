@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# This routing rule is critical for React Single Page Applications (SPAs)
+# It ensures that if a user reloads the page on a specific URL (like /dashboard),
+# Netlify redirects the request back to the React index.html without a 404 error.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

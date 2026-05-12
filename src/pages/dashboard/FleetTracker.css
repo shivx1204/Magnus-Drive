@@ -1,0 +1,87 @@
+@theme {
+  --color-fc-on-error: #690005;
+  --color-fc-tertiary: #c6c6c7;
+  --color-fc-surface-container-highest: #33343e;
+  --color-fc-on-tertiary-fixed: #1a1c1c;
+  --color-fc-secondary-fixed: #d4e3ff;
+  --color-fc-primary: #b9c3ff;
+  --color-fc-surface-container-high: #282933;
+  --color-fc-on-tertiary: #2f3131;
+  --color-fc-inverse-on-surface: #2f3039;
+  --color-fc-surface-tint: #b9c3ff;
+  --color-fc-on-tertiary-fixed-variant: #454747;
+  --color-fc-background: #11131b;
+  --color-fc-tertiary-container: #727474;
+  --color-fc-surface-container-low: #1a1b24;
+  --color-fc-on-surface: #e2e1ee;
+  --color-fc-on-primary-fixed: #001258;
+  --color-fc-outline-variant: #444655;
+  --color-fc-on-surface-variant: #c4c5d8;
+  --color-fc-surface-container: #1e1f28;
+  --color-fc-on-primary-fixed-variant: #0032c3;
+  --color-fc-surface-variant: #33343e;
+  --color-fc-secondary: #b7c7e4;
+  --color-fc-error-container: #93000a;
+  --color-fc-on-primary: #00228b;
+  --color-fc-surface: #11131b;
+  --color-fc-on-primary-container: #fcfaff;
+  --color-fc-surface-dim: #11131b;
+  --color-fc-surface-bright: #373942;
+  --color-fc-on-error-container: #ffdad6;
+  --color-fc-on-secondary-fixed-variant: #38475f;
+  --color-fc-secondary-container: #38475f;
+  --color-fc-tertiary-fixed-dim: #c6c6c7;
+  --color-fc-primary-fixed-dim: #b9c3ff;
+  --color-fc-error: #ffb4ab;
+  --color-fc-primary-fixed: #dee1ff;
+  --color-fc-on-secondary-fixed: #0b1c31;
+  --color-fc-on-secondary-container: #a6b6d2;
+  --color-fc-primary-container: #4264fb;
+  --color-fc-outline: #8e8fa1;
+  --color-fc-on-background: #e2e1ee;
+  --color-fc-tertiary-fixed: #e2e2e2;
+  --color-fc-inverse-primary: #264ce5;
+  --color-fc-surface-container-lowest: #0c0e16;
+  --color-fc-secondary-fixed-dim: #b7c7e4;
+  --color-fc-on-secondary: #223147;
+  --color-fc-on-tertiary-container: #fbfbfb;
+  --color-fc-inverse-surface: #e2e1ee;
+  
+  --font-fc-label: "JetBrains Mono", monospace;
+  --font-fc-body: "Inter", sans-serif;
+  --font-fc-display: "Space Grotesk", sans-serif;
+}
+
+.fc-glass-panel {
+  background: linear-gradient(135deg, rgba(30, 31, 40, 0.9) 0%, rgba(17, 19, 27, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.fc-ghost-border {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.fc-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.fc-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.fc-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(142, 143, 161, 0.3);
+  border-radius: 4px;
+}
+.fc-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(142, 143, 161, 0.6);
+}
+
+/* Base resets for the tracker container */
+.fleet-tracker-container {
+  color: var(--color-fc-on-surface);
+  font-family: var(--font-fc-body);
+}
+
+.leaflet-container {
+  background: var(--color-fc-surface-dim) !important;
+}
